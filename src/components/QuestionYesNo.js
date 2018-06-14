@@ -2,6 +2,7 @@ import React from 'react';
 import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
+import { phraseMatches } from '../lib/helper';
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
@@ -31,17 +32,13 @@ class Question extends React.Component {
     }
 
     chooseAnswer = (result) => {
-        result = result.split(' ');
-        console.log(result);
         let selectedOption = null;
 
-        this.props.options.forEach((option, i) =>
-            option.keywords.forEach(word => {
-                if (result.indexOf(word) !== -1) {
-                    selectedOption = option;
-                }
-            })
-        );
+        this.props.options.forEach((option, i) => {
+            if (phraseMatches(result, option.keywords)) {
+                selectedOption = option;
+            }
+        });
 
         if (selectedOption) {
             // this.setState({
@@ -57,20 +54,16 @@ class Question extends React.Component {
     }
 
     confirmationCheck = (result) => {
-        result = result.split(' ');
-        console.log(result);
         let approve = false;
         let decline = false;
-        approveWords.forEach(word => {
-            if (result.indexOf(word) >= 0) {
-                approve = true;
-            }
-        })
-        declineWords.forEach(word => {
-            if (result.indexOf(word) >= 0) {
-                decline = true;
-            }
-        })
+
+        if (phraseMatches(result, approveWords)) {
+            approve = true;
+        }
+
+        if (phraseMatches(result, declineWords)) {
+            decline = true;
+        }
 
         if (approve === decline) {
             this.setState({
