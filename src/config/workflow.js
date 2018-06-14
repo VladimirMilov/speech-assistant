@@ -1,18 +1,31 @@
+export const questionTypes = {
+    OPEN: 'QUESTION_TYPE_OPEN',
+    MULTI: 'MULTI',
+    RADIO: 'RADIO',
+}
+
 export const steps = [
     {
         id: 0,
-        component: 'Question 1',
-        title: 'Lorem ipsum dolor',
-        options: ['first', 'second', 'third']
+        component: 'Start',
+
     },
     {
         id: 1,
-        component: 'Question 2',
+        component: 'Question',
+        type: this.questionTypes.OPEN,
         title: 'Lorem ipsum dolor',
         options: ['first', 'second', 'third']
     },
     {
         id: 2,
+        component: 'Question',
+        type: this.questionTypes.RADIO,
+        title: 'Lorem ipsum dolor',
+        options: ['first', 'second', 'third']
+    },
+    {
+        id: 3,
         component: 'Result',
         title: 'Lorem ipsum dolor',
         ammount: 25730,
