@@ -1,33 +1,102 @@
-export const questionTypes = {
-    OPEN: 'QUESTION_TYPE_OPEN',
-    MULTI: 'MULTI',
-    RADIO: 'RADIO',
+const answerTypes = {
+    OPEN: 'ANSWER_TYPE_OPEN',
+    MULTI: 'ANSWER_TYPE_MULTI',
+    RADIO: 'ANSWER_TYPE_RADIO',
+    YESNO: 'ANSWER_TYPE_YESNO',
 }
 
-export const steps = [
+const systemMessages = {
+    start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    yourChoice: 'You have chosen "{{var1}}"',
+    isThisCorrect: 'Is this correct?',
+    youHaveChosen: 'You have chosen',
+    didntUnderstand: 'I did not get that. Could you please repeat.',
+    end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
+};
+
+const getSystemMessage = (key, vars = []) => {
+    let msg = systemMessages[key];
+    vars.forEach((val, i) => {
+        msg = msg.replace(`{{var${i}}}`, val);
+    });
+
+    return msg;
+};
+
+const steps = [
     {
         id: 0,
         component: 'Start',
-
+        keywords: ['start', 'begin', 'initiate'],
     },
     {
         id: 1,
         component: 'Question',
+<<<<<<< HEAD
         type: questionTypes.OPEN,
         title: 'Lorem ipsum dolor',
         options: ['first', 'second', 'third']
+=======
+        answer: answerTypes.RADIO,
+        title: 'Multichoice question?',
+        options: [
+            {
+                label: 'Option 1',
+                keywords: ['one', '1'],
+                weight: 2.5,
+            },
+            {
+                label: 'Option 2',
+                keywords: ['two', '2'],
+                weight: 3.5,
+            },
+            {
+                label: 'Option 3',
+                keywords: ['three', '3'],
+                weight: 0.5,
+            },
+        ],
+>>>>>>> fea0e27104116e65df73cd5332e3bd676f65dc7e
     },
     {
         id: 2,
         component: 'Question',
+<<<<<<< HEAD
         type: questionTypes.RADIO,
         title: 'Lorem ipsum dolor',
         options: ['first', 'second', 'third']
+=======
+        answer: answerTypes.YESNO,
+        title: 'Yes or no question?',
+        options: [
+            {
+                label: 'Yes',
+                keywords: ['yes', 'affirmative'],
+                weight: 250,
+            },
+            {
+                label: 'No',
+                keywords: ['no', 'denied'],
+                weight: 0,
+            },
+        ],
+>>>>>>> fea0e27104116e65df73cd5332e3bd676f65dc7e
     },
     {
         id: 3,
-        component: 'Result',
+        component: 'Question',
+        type: answerTypes.OPEN,
         title: 'Lorem ipsum dolor',
-        ammount: 25730,
+    },
+    {
+        id: 4,
+        component: 'End',
+        title: 'Lorem ipsum dolor',
     },
 ]
+
+module.exports = {
+    steps,
+    answerTypes,
+    getSystemMessage,
+}
