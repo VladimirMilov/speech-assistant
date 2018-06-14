@@ -44,17 +44,17 @@ const steps = [
         options: [
             {
                 label: 'Option 1',
-                keywords: ['one', '1'],
+                keywords: ['one', 'first',  'real answer'],
                 weight: 2.5,
             },
             {
                 label: 'Option 2',
-                keywords: ['two', '2'],
+                keywords: ['two', 'second', 'purple unicorn'],
                 weight: 3.5,
             },
             {
                 label: 'Option 3',
-                keywords: ['three', '3'],
+                keywords: ['three', 'third', 'green apple'],
                 weight: 0.5,
             },
         ],
