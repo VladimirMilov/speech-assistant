@@ -4,27 +4,7 @@ import Question from './components/Question';
 import Result from './components/Result';
 import VoicePlayer from './lib/VoicePlayer';
 import VoiceRecognition from './lib/VoiceRecognition';
-
-const steps = [
-  {
-    id: 0,
-    component: 'Question 1',
-    title: 'Lorem ipsum dolor',
-    options: ['first', 'second', 'third']
-  },
-  {
-    id: 1,
-    component: 'Question 2',
-    title: 'Lorem ipsum dolor',
-    options: ['first', 'second', 'third']
-  },
-  {
-    id: 2,
-    component: 'Result',
-    title: 'Lorem ipsum dolor',
-    ammount: 25730,
-  },
-]
+import { steps } from './config/workflow';
 
 class App extends Component {
   constructor(props) {
@@ -68,6 +48,7 @@ class App extends Component {
         <VoicePlayer
           play
           text="React voice player demonstration"
+          onEnd={() => { }}
         />
       </div>
     );
