@@ -5,14 +5,29 @@ const answerTypes = {
     YESNO: 'ANSWER_TYPE_YESNO',
 }
 
+const systemMessages = {
+    start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    yourChoice: 'You have chosen "{{var1}}"',
+    isThisCorrect: 'Is this correct?',
+    youHaveChosen: 'You have chosen',
+    didntUnderstand: 'I did not get that. Could you please repeat.',
+    end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
+};
+
+const getSystemMessage = (key, vars = []) => {
+    let msg = systemMessages[key];
+    vars.forEach((val, i) => {
+        msg = msg.replace(`{{var${i}}}`, val);
+    });
+
+    return msg;
+};
+
 const steps = [
     {
         id: 0,
         component: 'Start',
-        keywords: {
-            'en-GB': ['start', 'begin'],
-            'nl-NL': ['begin', 'beginnen'],
-        },
+        keywords: ['start', 'begin', 'initiate'],
     },
     {
         id: 1,
@@ -71,4 +86,5 @@ const steps = [
 module.exports = {
     steps,
     answerTypes,
+    getSystemMessage,
 }
