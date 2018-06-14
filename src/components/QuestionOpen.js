@@ -6,7 +6,7 @@ import { getSystemMessage } from '../config/workflow';
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
 
-class AddressQuestion extends React.Component {
+class QuestionOpen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -133,4 +133,4 @@ class AddressQuestion extends React.Component {
     }
 }
 
-export default AddressQuestion;
+export default QuestionOpen;

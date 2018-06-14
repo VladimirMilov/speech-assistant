@@ -8,6 +8,7 @@ import {
     getSystemMessage,
     voices,
 } from '../config/workflow';
+import { phraseMatches } from '../lib/helper';
 
 const bgStyle = {
     backgroundColor: '#00a4a7',
@@ -51,11 +52,9 @@ class Start extends React.Component {
     }
 
     checkResult = (res) => {
-        res.finalTranscript.split().forEach(word => {
-            if (this.props.step.keywords.indexOf(word) !== -1) {
-                this.props.nextStep();
-            }
-        });
+        if (phraseMatches(res.finalTranscript, this.props.step.keywords)) {
+            this.props.nextStep();
+        }
     }
 
     render() {

@@ -57,7 +57,7 @@ const steps = [
             },
             {
                 label: 'Villa',
-                keywords: ['two', 'second', 'villa', '2'],
+                keywords: ['two', 'second', 'villa', 'vila', '2'],
                 weight: 3.5,
             },
             {

@@ -3,6 +3,7 @@ import './App.css';
 import Start from './components/Start';
 import QuestionMulti from './components/QuestionMulti';
 import QuestionYesNo from './components/QuestionYesNo';
+import QuestionOpen from './components/QuestionOpen';
 import Result from './components/Result';
 import VoicePlayer from './lib/VoicePlayer';
 import VoiceRecognition from './lib/VoiceRecognition';
@@ -65,6 +66,14 @@ class App extends Component {
   renderQuestion = () => {
     const currStep = steps[this.state.currentStep];
     switch (currStep.answer) {
+      case answerTypes.OPEN: return (
+        <QuestionOpen
+          title={currStep.title}
+          options={currStep.options}
+          next={this.nextStep}
+          previous={this.previousStep}
+          id={currStep.id} />
+      );
       case answerTypes.MULTI: return (
         <QuestionMulti
           title={currStep.title}
