@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { VoicePlayer, VoiceRecognition } from 'react-voice-components';
+import VoicePlayer from './lib/VoicePlayer';
+import VoiceRecognition from './lib/VoiceRecognition';
 
 class App extends Component {
   render() {
