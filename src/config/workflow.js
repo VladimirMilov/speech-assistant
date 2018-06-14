@@ -18,7 +18,7 @@ const systemMessages = {
     isThisCorrect: 'Is this correct?',
     youHaveChosen: 'You have chosen',
     didntUnderstand: 'I did not get that. Could you please repeat.',
-    end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
+    end: 'You have completed the questionnaire. Your total is {{var1}}.',
 };
 
 const getSystemMessage = (key, vars = []) => {
@@ -44,7 +44,7 @@ const steps = [
         options: [
             {
                 label: 'Option 1',
-                keywords: ['one', 'first',  'real answer'],
+                keywords: ['one', 'first', 'real answer'],
                 weight: 2.5,
             },
             {
@@ -87,6 +87,7 @@ const steps = [
         id: 4,
         type: stepTypes.END,
         title: 'Lorem ipsum dolor',
+        keywords: ['start', 'again', 'restart'],
     },
 ];
 
