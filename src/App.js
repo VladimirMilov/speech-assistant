@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Question from './components/Question';
 import Result from './components/Result';
+import VoicePlayer from './lib/VoicePlayer';
+import VoiceRecognition from './lib/VoiceRecognition';
 
 const steps = [
   {
@@ -58,10 +60,15 @@ class App extends Component {
           <Result
             title={currentStep.title}
             ammount={currentStep.ammount}
-            // next={this.nextStep}
-            // previous={this.previousStep}
-            // id={currentStep.id}
+          // next={this.nextStep}
+          // previous={this.previousStep}
+          // id={currentStep.id}
           />}
+
+        <VoicePlayer
+          play
+          text="React voice player demonstration"
+        />
       </div>
     );
   }
