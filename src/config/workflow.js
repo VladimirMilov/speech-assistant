@@ -13,14 +13,14 @@ export const steps = [
     {
         id: 1,
         component: 'Question',
-        type: this.questionTypes.OPEN,
+        type: questionTypes.OPEN,
         title: 'Lorem ipsum dolor',
         options: ['first', 'second', 'third']
     },
     {
         id: 2,
         component: 'Question',
-        type: this.questionTypes.RADIO,
+        type: questionTypes.RADIO,
         title: 'Lorem ipsum dolor',
         options: ['first', 'second', 'third']
     },

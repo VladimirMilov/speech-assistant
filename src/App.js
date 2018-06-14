@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 0,
+      currentStep: 1,
     }
   }
 
@@ -45,11 +45,6 @@ class App extends Component {
           // id={currentStep.id}
           />}
 
-        <VoicePlayer
-          play
-          text="React voice player demonstration"
-          onEnd={() => { }}
-        />
       </div>
     );
   }
