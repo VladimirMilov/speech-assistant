@@ -19,6 +19,7 @@ const systemMessages = {
     youHaveChosen: 'You have chosen',
     didntUnderstand: 'I did not get that. Could you please repeat.',
     anotherOption: 'Choose another option.',
+    anotherAddress: 'Ok, Choose another address.',
     end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
 };
 
@@ -40,7 +41,7 @@ const steps = [
     {
         id: 1,
         type: stepTypes.QUESTION,
-        type: answerTypes.OPEN,
+        answer: answerTypes.OPEN,
         title: 'Please enter your address.',
     },
     {
