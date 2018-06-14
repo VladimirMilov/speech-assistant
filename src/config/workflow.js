@@ -40,7 +40,7 @@ const steps = [
     {
         id: 1,
         type: stepTypes.QUESTION,
-        answer: answerTypes.RADIO,
+        answer: answerTypes.MULTI,
         title: 'Multichoice question?',
         options: [
             {

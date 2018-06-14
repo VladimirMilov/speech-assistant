@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
 import Start from './components/Start';
-import Question from './components/Question';
+import QuestionMulti from './components/QuestionMulti';
+import QuestionYesNo from './components/QuestionYesNo';
 import Result from './components/Result';
 import VoicePlayer from './lib/VoicePlayer';
 import VoiceRecognition from './lib/VoiceRecognition';
-import { steps, stepTypes } from './config/workflow';
+import {
+  steps,
+  stepTypes,
+  answerTypes,
+} from './config/workflow';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 1,
+      currentStep: 0,
       stepsResult: [],
     }
   }
@@ -25,7 +30,7 @@ class App extends Component {
 
   nextStep = () => {
     this.setState({
-      currentStep: this.state.currentStep + 1,
+      currentStep: this.state.currentStep === 4 ? 0 : this.state.currentStep + 1,
     })
   }
 
@@ -43,14 +48,7 @@ class App extends Component {
         <Start nextStep={this.nextStep} step={currStep} />
       );
 
-      case stepTypes.QUESTION: return (
-        <Question
-          title={currStep.title}
-          options={currStep.options}
-          next={this.nextStep}
-          previous={this.previousStep}
-          id={currStep.id} />
-      );
+      case stepTypes.QUESTION: return this.renderQuestion();
 
       case stepTypes.END: return (
         <Result
@@ -61,6 +59,32 @@ class App extends Component {
 
       default:
         return (<div>Step type not found</div>);
+    }
+  }
+
+  renderQuestion = () => {
+    const currStep = steps[this.state.currentStep];
+    switch (currStep.answer) {
+      case answerTypes.MULTI: return (
+        <QuestionMulti
+          title={currStep.title}
+          options={currStep.options}
+          next={this.nextStep}
+          previous={this.previousStep}
+          id={currStep.id} />
+      );
+
+      case answerTypes.YESNO: return (
+        <QuestionYesNo
+          title={currStep.title}
+          options={currStep.options}
+          next={this.nextStep}
+          previous={this.previousStep}
+          id={currStep.id} />
+      );
+
+      default:
+        return (<div>Question type not found</div>);
     }
   }
 
