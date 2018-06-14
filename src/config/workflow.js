@@ -19,6 +19,7 @@ const systemMessages = {
     youHaveChosen: 'You have chosen',
     didntUnderstand: 'I did not get that. Could you please repeat.',
     anotherOption: 'Choose another option.',
+    anotherAddress: 'Ok, Choose another address.',
     end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
 };
 
@@ -40,31 +41,37 @@ const steps = [
     {
         id: 1,
         type: stepTypes.QUESTION,
+        answer: answerTypes.OPEN,
+        title: 'Please enter your address.',
+    },
+    {
+        id: 2,
+        type: stepTypes.QUESTION,
         answer: answerTypes.MULTI,
-        title: 'Multichoice question?',
+        title: 'What is your house type',
         options: [
             {
-                label: 'Option 1',
-                keywords: ['option one', 'first', 'real answer', '1'],
+                label: 'Apartment',
+                keywords: ['one', 'first', 'apartment', '1'],
                 weight: 2.5,
             },
             {
-                label: 'Option 2',
-                keywords: ['option two', 'second', 'purple unicorn', '2'],
+                label: 'Villa',
+                keywords: ['two', 'second', 'villa', '2'],
                 weight: 3.5,
             },
             {
-                label: 'Option 3',
-                keywords: ['option three', 'third', 'green apple', '3'],
+                label: 'Canal house',
+                keywords: ['three', 'third', 'canal', 'canal house', '3'],
                 weight: 0.5,
             },
         ],
     },
     {
-        id: 2,
+        id: 3,
         type: stepTypes.QUESTION,
         answer: answerTypes.YESNO,
-        title: 'Yes or no question?',
+        title: 'Is your Foundation with Piling? ',
         options: [
             {
                 label: 'Yes',
@@ -78,18 +85,7 @@ const steps = [
             },
         ],
     },
-    {
-        id: 3,
-        type: stepTypes.QUESTION,
-        type: answerTypes.OPEN,
-        title: 'Lorem ipsum dolor',
-    },
-    {
-        id: 4,
-        type: stepTypes.END,
-        title: 'Lorem ipsum dolor',
-        keywords: ['start', 'again', 'restart'],
-    },
+
 ];
 
 const voices = speechSynthesis.getVoices();
