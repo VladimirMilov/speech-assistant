@@ -18,7 +18,7 @@ const systemMessages = {
     isThisCorrect: 'Is this correct?',
     youHaveChosen: 'You have chosen',
     didntUnderstand: 'I did not get that. Could you please repeat.',
-    anotherOption: 'I did not get that. Could you please repeat.',
+    anotherOption: 'Choose another option.',
     end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
 };
 
@@ -45,17 +45,17 @@ const steps = [
         options: [
             {
                 label: 'Option 1',
-                keywords: ['option one', 'first', 'real answer'],
+                keywords: ['option one', 'first', 'real answer', '1'],
                 weight: 2.5,
             },
             {
                 label: 'Option 2',
-                keywords: ['option two', 'second', 'purple unicorn'],
+                keywords: ['option two', 'second', 'purple unicorn', '2'],
                 weight: 3.5,
             },
             {
                 label: 'Option 3',
-                keywords: ['option three', 'third', 'green apple'],
+                keywords: ['option three', 'third', 'green apple', '3'],
                 weight: 0.5,
             },
         ],

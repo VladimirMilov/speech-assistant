@@ -3,20 +3,8 @@ import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 
-const actionTypes = {
-    SPEAK: 'speak',
-    LISTEN: 'listen',
-}
-const steps = [
-    { type: actionTypes.SPEAK },
-    { type: actionTypes.SPEAK },
-    { type: actionTypes.LISTEN },
-    { type: actionTypes.SPEAK },
-    { type: actionTypes.LISTEN },
-]
-
 const approveWords = ['yes', 'correct', 'right'];
-const declineWords = ['no', 'sure', 'not', 'world', 'hello'];
+const declineWords = ['no', 'not', 'world', 'hello'];
 
 class Question extends React.Component {
     constructor(props) {
@@ -28,11 +16,23 @@ class Question extends React.Component {
             selectAnotherQuestion: false,
         }
     }
+
+    componentWillReceiveProps() {
+        this.setState({
+            step: 0,
+            selectedOption: null,
+            didntUnderstand: false,
+            selectAnotherQuestion: false,
+        });
+    }
+
     nextStep = () => {
         this.setState({ step: this.state.step + 1 })
     }
 
     chooseAnswer = (result) => {
+        result = result.split(' ');
+        console.log(result);
         let selectedOption = null;
 
         this.props.options.forEach((option, i) =>
@@ -57,20 +57,22 @@ class Question extends React.Component {
     }
 
     confirmationCheck = (result) => {
+        result = result.split(' ');
+        console.log(result);
         let approve = false;
         let decline = false;
-        approveWords.map(word => {
+        approveWords.forEach(word => {
             if (result.indexOf(word) >= 0) {
                 approve = true;
             }
         })
-        declineWords.map(word => {
+        declineWords.forEach(word => {
             if (result.indexOf(word) >= 0) {
                 decline = true;
             }
         })
 
-        if ((approve && decline) || (!approve && !decline)) {
+        if (approve === decline) {
             this.setState({
                 didntUnderstand: true,
                 step: this.state.step,
@@ -109,7 +111,7 @@ class Question extends React.Component {
                     <VoicePlayer
                         play
                         text={getSystemMessage('anotherOption')}
-                        onEnd={() => this.setState({ selectAnotherQuestion: false, step: step + 1 })}
+                        onEnd={() => this.setState({ selectAnotherQuestion: false, step: 2 })}
                     />
                 }
 
@@ -132,7 +134,7 @@ class Question extends React.Component {
                     />
                 }
                 {/* Listen for answer */}
-                {step === 2 &&
+                {step === 2 && !this.state.didntUnderstand &&
                     <VoiceRecognition
                         onResult={(res) => this.chooseAnswer(res.finalTranscript)}
                     />
