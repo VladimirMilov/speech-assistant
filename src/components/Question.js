@@ -1,6 +1,7 @@
 import React from 'react';
 import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
+import { getSystemMessage } from '../config/workflow';
 
 const actionTypes = {
     SPEAK: 'speak',
@@ -13,32 +14,106 @@ const steps = [
     { type: actionTypes.SPEAK },
     { type: actionTypes.LISTEN },
 ]
+
+const approveWords = ['yes', 'correct', 'right'];
+const declineWords = ['no', 'sure', 'not', 'world', 'hello'];
+
 class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             step: 0,
+            selectedOption: null,
+            didntUnderstand: false,
+            selectAnotherQuestion: false,
         }
     }
-    nextStep = () => { 
-       this.setState({ step: this.state.step + 1 })
-   }
+    nextStep = () => {
+        this.setState({ step: this.state.step + 1 })
+    }
 
+    chooseAnswer = (result) => {
+        let selectedOption = null;
+
+        this.props.options.forEach((option, i) =>
+            option.keywords.forEach(word => {
+                if (result.indexOf(word) !== -1) {
+                    selectedOption = option;
+                }
+            })
+        );
+
+        if (selectedOption) {
+            this.setState({
+                selectedOption: selectedOption,
+            })
+            this.nextStep();
+        } else {
+            this.setState({
+                didntUnderstand: true,
+                step: this.state.step,
+            })
+        }
+    }
+
+    confirmationCheck = (result) => {
+        let approve = false;
+        let decline = false;
+        approveWords.map(word => {
+            if (result.indexOf(word) >= 0) {
+                approve = true;
+            }
+        })
+        declineWords.map(word => {
+            if (result.indexOf(word) >= 0) {
+                decline = true;
+            }
+        })
+
+        if ((approve && decline) || (!approve && !decline)) {
+            this.setState({
+                didntUnderstand: true,
+                step: this.state.step,
+            })
+        }
+        if (approve) {
+            this.props.next(this.state.selectedOption);
+        }
+        if (decline) {
+            this.setState({
+                selectAnotherQuestion: true,
+                step: 2,
+            })
+        }
+    }
     render(props) {
         const { title, options, id, next, previous } = this.props;
         const { step } = this.state;
         const readableOptions = options.map(op => op.label).join(". ");
-        console.log(readableOptions);
-        
-        const chooseAnswer = (result) => {
 
-        }
 
-        const confirmationCheck = () => {
 
-        }
         return (
             <div>
+                {/* Didnt understand the question */}
+                {this.state.didntUnderstand &&
+                    <VoicePlayer
+                        play
+                        text={getSystemMessage('didntUnderstand')}
+                        onEnd={() => this.setState({ didntUnderstand: false, step: step })}
+                    />
+                }
+
+                {/* Didnt understand the question */}
+                {this.state.selectAnotherQuestion &&
+                    <VoicePlayer
+                        play
+                        text={getSystemMessage('anotherOption')}
+                        onEnd={() => this.setState({ selectAnotherQuestion: false, step: step + 1 })}
+                    />
+                }
+
+
                 {/* Read the question */}
                 {step === 0 &&
                     <VoicePlayer
@@ -59,22 +134,22 @@ class Question extends React.Component {
                 {/* Listen for answer */}
                 {step === 2 &&
                     <VoiceRecognition
-                        onResult={(res) => this.chooseAnswer(res)}
+                        onResult={(res) => this.chooseAnswer(res.finalTranscript)}
                     />
                 }
                 {/* Read confirmation answer */}
                 {step === 3 &&
                     <VoicePlayer
                         play
-                        text={`Are you sure about this answer: ${this.state.temporarySelectedAnswer}`}
+                        text={`Are you sure about this answer: ${this.state.selectedOption.label}`}
                         onEnd={this.nextStep}
                     />
                 }
 
                 {/* Listen for confirmation answer */}
-                {step === 2 &&
+                {step === 4 &&
                     <VoiceRecognition
-                        onResult={(res) => this.confirmationCheck(res)}
+                        onResult={(res) => this.confirmationCheck(res.finalTranscript)}
                     />
                 }
                 {/* <VoiceRecognition /> */}
