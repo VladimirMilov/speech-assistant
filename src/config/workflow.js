@@ -12,8 +12,8 @@ const answerTypes = {
 };
 
 const systemMessages = {
-    // start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
-    start: 'Welcome',
+    start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    // start: 'Welcome',
     yourChoice: 'You have chosen "{{var1}}"',
     isThisCorrect: 'Is this correct?',
     youHaveChosen: 'You have chosen',
@@ -85,7 +85,12 @@ const steps = [
             },
         ],
     },
-
+    {
+        id: 4,
+        type: stepTypes.END,
+        title: 'Lorem ipsum dolor',
+        keywords: ['start', 'again', 'restart'],
+    },
 ];
 
 const voices = speechSynthesis.getVoices();

@@ -53,8 +53,8 @@ class App extends Component {
 
       case stepTypes.END: return (
         <Result
-          title={currStep.title}
-          ammount={currStep.ammount}
+          {...currStep}
+          nextStep={this.nextStep}
         />
       );
 
