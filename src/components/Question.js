@@ -27,8 +27,9 @@ class Question extends React.Component {
     render(props) {
         const { title, options, id, next, previous } = this.props;
         const { step } = this.state;
-        const readableOptions = options.map(op => op.label).join(', ');
+        const readableOptions = options.map(op => op.label).join(". ");
         console.log(readableOptions);
+        
         const chooseAnswer = (result) => {
 
         }
