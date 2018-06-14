@@ -1,12 +1,19 @@
+const stepTypes = {
+    START: 'STEP_TYPE_START',
+    QUESTION: 'STEP_TYPE_QUESTION',
+    END: 'STEP_TYPE_END',
+};
+
 const answerTypes = {
     OPEN: 'ANSWER_TYPE_OPEN',
     MULTI: 'ANSWER_TYPE_MULTI',
     RADIO: 'ANSWER_TYPE_RADIO',
     YESNO: 'ANSWER_TYPE_YESNO',
-}
+};
 
 const systemMessages = {
-    start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    // start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    start: 'Welcome',
     yourChoice: 'You have chosen "{{var1}}"',
     isThisCorrect: 'Is this correct?',
     youHaveChosen: 'You have chosen',
@@ -26,12 +33,12 @@ const getSystemMessage = (key, vars = []) => {
 const steps = [
     {
         id: 0,
-        component: 'Start',
+        type: stepTypes.START,
         keywords: ['start', 'begin', 'initiate'],
     },
     {
         id: 1,
-        component: 'Question',
+        type: stepTypes.QUESTION,
         answer: answerTypes.RADIO,
         title: 'Multichoice question?',
         options: [
@@ -54,7 +61,7 @@ const steps = [
     },
     {
         id: 2,
-        component: 'Question',
+        type: stepTypes.QUESTION,
         answer: answerTypes.YESNO,
         title: 'Yes or no question?',
         options: [
@@ -72,19 +79,23 @@ const steps = [
     },
     {
         id: 3,
-        component: 'Question',
+        type: stepTypes.QUESTION,
         type: answerTypes.OPEN,
         title: 'Lorem ipsum dolor',
     },
     {
         id: 4,
-        component: 'End',
+        type: stepTypes.END,
         title: 'Lorem ipsum dolor',
     },
-]
+];
+
+const voices = speechSynthesis.getVoices();
 
 module.exports = {
     steps,
     answerTypes,
     getSystemMessage,
+    stepTypes,
+    voices,
 }

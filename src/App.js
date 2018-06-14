@@ -1,50 +1,73 @@
 import React, { Component } from 'react';
 import './App.css';
+import Start from './components/Start';
 import Question from './components/Question';
 import Result from './components/Result';
 import VoicePlayer from './lib/VoicePlayer';
 import VoiceRecognition from './lib/VoiceRecognition';
-import { steps } from './config/workflow';
+import { steps, stepTypes } from './config/workflow';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 1,
+      currentStep: 0,
+      stepsResult: [],
     }
   }
 
-  nextStep = (step) => {
+  resetState = () => {
     this.setState({
-      currentStep: step + 1,
+      currentStep: 0,
+      stepsResult: [],
     })
   }
 
-  previousStep = (step) => {
+  nextStep = () => {
     this.setState({
-      currentStep: step - 1,
+      currentStep: this.state.currentStep + 1,
     })
+  }
+
+  previousStep = () => {
+    this.setState({
+      currentStep: this.state.currentStep - 1,
+    })
+  }
+
+  renderStep = () => {
+    const currStep = steps[this.state.currentStep];
+    console.log(currStep);
+    switch (currStep.type) {
+      case stepTypes.START: return (
+        <Start nextStep={this.nextStep} step={currStep} />
+      );
+
+      case stepTypes.QUESTION: return (
+        <Question
+          title={currStep.title}
+          options={currStep.options}
+          next={this.nextStep}
+          previous={this.previousStep}
+          id={currStep.id} />
+      );
+
+      case stepTypes.END: return (
+        <Result
+          title={currStep.title}
+          ammount={currStep.ammount}
+        />
+      );
+
+      default:
+        return (<div>Step type not found</div>);
+    }
   }
 
   render() {
-    const currentStep = steps[this.state.currentStep];
     return (
       <div className="App">
-        {currentStep.component === 'Question' ?
-          <Question
-            title={currentStep.title}
-            options={currentStep.options}
-            next={this.nextStep}
-            previous={this.previousStep}
-            id={currentStep.id} /> :
-          <Result
-            title={currentStep.title}
-            ammount={currentStep.ammount}
-          // next={this.nextStep}
-          // previous={this.previousStep}
-          // id={currentStep.id}
-          />}
-
+        {this.renderStep()}
       </div>
     );
   }
