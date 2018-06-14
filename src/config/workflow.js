@@ -32,11 +32,6 @@ const steps = [
     {
         id: 1,
         component: 'Question',
-<<<<<<< HEAD
-        type: questionTypes.OPEN,
-        title: 'Lorem ipsum dolor',
-        options: ['first', 'second', 'third']
-=======
         answer: answerTypes.RADIO,
         title: 'Multichoice question?',
         options: [
@@ -56,16 +51,10 @@ const steps = [
                 weight: 0.5,
             },
         ],
->>>>>>> fea0e27104116e65df73cd5332e3bd676f65dc7e
     },
     {
         id: 2,
         component: 'Question',
-<<<<<<< HEAD
-        type: questionTypes.RADIO,
-        title: 'Lorem ipsum dolor',
-        options: ['first', 'second', 'third']
-=======
         answer: answerTypes.YESNO,
         title: 'Yes or no question?',
         options: [
@@ -80,7 +69,6 @@ const steps = [
                 weight: 0,
             },
         ],
->>>>>>> fea0e27104116e65df73cd5332e3bd676f65dc7e
     },
     {
         id: 3,
