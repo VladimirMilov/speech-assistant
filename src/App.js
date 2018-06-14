@@ -14,7 +14,7 @@ class App extends Component {
         <VoicePlayer
           play
           text="React voice player demonstration"
-        />,
+        />
       </div>
     );
   }
