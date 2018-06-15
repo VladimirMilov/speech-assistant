@@ -3,6 +3,7 @@ import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
+import recording from '../recording.gif';
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
@@ -155,7 +156,14 @@ class Question extends React.Component {
                 <div style={{
                     color: 'white',
                     fontSize: 35,
+                    marginTop: -150,
                 }}>
+                    <img src={recording} style={{
+                        marginBottom: 150,
+                        width: '10%',
+                        height: '10%',
+                        visibility: (step === 2 && !this.state.didntUnderstand) || step === 4 ? 'visible' : 'hidden',
+                    }} />
                     <div style={{ marginBottom: 50 }}>{this.props.title}</div>
                     {this.props.options.map(option => (
                         <div style={{
