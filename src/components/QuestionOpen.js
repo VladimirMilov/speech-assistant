@@ -4,6 +4,7 @@ import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
 import wavegif from '../assets/Wave.gif';
+import recording from '../recording.gif';
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
@@ -11,12 +12,12 @@ const declineWords = ['no', 'not', 'world', 'hello'];
 const speakerStyles = {
     position: 'fixed',
     top: '20px',
-    left: '43%',
+    left: '46%',
 }
 
-const Wave = {
-    width: '200px',
-    height: '80px',
+const waveStyle = {
+    width: '128px',
+    height: '72px',
 }
 
 class QuestionOpen extends React.Component {
@@ -90,27 +91,33 @@ class QuestionOpen extends React.Component {
             <div>
                 {/* Didnt understand the question */}
                 {this.state.didntUnderstand &&
-                    <VoicePlayer
-                        play
-                        text={getSystemMessage('didntUnderstand')}
-                        onEnd={() => this.setState({ didntUnderstand: false, step: step })}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={waveStyle} />
+                        <VoicePlayer
+                            play
+                            text={getSystemMessage('didntUnderstand')}
+                            onEnd={() => this.setState({ didntUnderstand: false, step: step })}
+                        />
+                    </div>
                 }
 
                 {/* Select another address */}
                 {this.state.selectAnotherAddress &&
-                    <VoicePlayer
-                        play
-                        text={getSystemMessage('anotherAddress')}
-                        onEnd={() => this.setState({ selectAnotherAddress: false, step: 1 })}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={waveStyle} />
+                        <VoicePlayer
+                            play
+                            text={getSystemMessage('anotherAddress')}
+                            onEnd={() => this.setState({ selectAnotherAddress: false, step: 1 })}
+                        />
+                    </div>
                 }
 
 
                 {/* Read the question */}
                 {step === 0 &&
                     <div style={speakerStyles}>
-                    <img src={wavegif} style={Wave} />
+                        <img src={wavegif} style={waveStyle} />
                         <VoicePlayer
                             play
                             text={title}
@@ -121,25 +128,34 @@ class QuestionOpen extends React.Component {
 
                 {/* Listen for answer */}
                 {step === 1 && !this.state.didntUnderstand &&
-                    <VoiceRecognition
-                        onResult={(res) => this.chooseAnswer(res.finalTranscript)}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={recording} style={waveStyle} />
+                        <VoiceRecognition
+                            onResult={(res) => this.chooseAnswer(res.finalTranscript)}
+                        />
+                    </div>
                 }
 
                 {/* Read confirmation answer */}
                 {step === 2 &&
-                    <VoicePlayer
-                        play
-                        text={`Is this your address: ${this.state.selectedAddress}`}
-                        onEnd={this.nextStep}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={waveStyle} />
+                        <VoicePlayer
+                            play
+                            text={`Is this your address: ${this.state.selectedAddress}`}
+                            onEnd={this.nextStep}
+                        />
+                    </div>
                 }
 
                 {/* Listen for confirmation answer */}
                 {step === 3 &&
-                    <VoiceRecognition
-                        onResult={(res) => this.confirmationCheck(res.finalTranscript)}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={recording} style={waveStyle} />
+                        <VoiceRecognition
+                            onResult={(res) => this.confirmationCheck(res.finalTranscript)}
+                        />
+                    </div>
                 }
 
                 <div style={{
