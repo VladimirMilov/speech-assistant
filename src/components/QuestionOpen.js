@@ -129,7 +129,8 @@ class QuestionOpen extends React.Component {
 
                 <div style={{
                     color: 'white',
-                    fontSize: 25,
+                    fontSize: 35,
+                    marginBottom: 50,
                 }}>
                     <div>{this.props.title}</div>
                     <div style={{
@@ -137,7 +138,6 @@ class QuestionOpen extends React.Component {
                         borderWidth: 1,
                         borderColor: '#003b5a',
                         borderRadius: 15,
-                        marginTop: 50,
                         padding: 20,
                         fontSize: 35,
                         color: this.state.addressEntered ? 'white' : '#C0C0C0',

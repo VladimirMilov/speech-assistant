@@ -7,12 +7,16 @@ import { phraseMatches } from '../lib/helper';
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
 
+const selectedStyle = {
+    backgroundColor: '#003b5a',
+};
+
 class Question extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             step: 0,
-            selectedOption: null,
+            selectedOption: { id: -1 },
             didntUnderstand: false,
             selectAnotherQuestion: false,
         }
@@ -21,7 +25,7 @@ class Question extends React.Component {
     componentWillReceiveProps() {
         this.setState({
             step: 0,
-            selectedOption: null,
+            selectedOption: { id: -1 },
             didntUnderstand: false,
             selectAnotherQuestion: false,
         });
@@ -76,6 +80,7 @@ class Question extends React.Component {
         }
         if (decline) {
             this.setState({
+                selectedOption: { id: -1 },
                 selectAnotherQuestion: true,
                 step: 2,
             })
@@ -147,12 +152,25 @@ class Question extends React.Component {
                 }
                 {/* <VoiceRecognition /> */}
 
-                <h1>Question component</h1>
-                <h1>{title}</h1>
-                <h1>{props}</h1>
-
-                <button onClick={() => next(id)}>Submit</button>
-                <button onClick={() => previous(id)}>Prevoius</button>
+                <div style={{
+                    color: 'white',
+                    fontSize: 35,
+                }}>
+                    <div style={{ marginBottom: 50 }}>{this.props.title}</div>
+                    {this.props.options.map(option => (
+                        <div style={{
+                            margin: 20,
+                            padding: 20,
+                            fontSize: 35,
+                            color: 'white',
+                            borderStyle: 'solid',
+                            borderWidth: 1,
+                            borderColor: '#003b5a',
+                            borderRadius: 15,
+                            backgroundColor: this.state.selectedOption.id === option.id ? '#003b5a' : 'transparent',
+                        }} > {option.label}</div>
+                    ))}
+                </div>
             </div>
         )
     }

@@ -48,19 +48,22 @@ const steps = [
         id: 2,
         type: stepTypes.QUESTION,
         answer: answerTypes.MULTI,
-        title: 'What is your house type',
+        title: 'What is your house type?',
         options: [
             {
+                id: 1,
                 label: 'Apartment',
                 keywords: ['one', 'first', 'apartment', '1'],
                 weight: 2.5,
             },
             {
+                id: 2,
                 label: 'Villa',
                 keywords: ['two', 'second', 'villa', 'vila', '2'],
                 weight: 3.5,
             },
             {
+                id: 3,
                 label: 'Canal house',
                 keywords: ['three', 'third', 'canal', 'canal house', '3'],
                 weight: 0.5,
