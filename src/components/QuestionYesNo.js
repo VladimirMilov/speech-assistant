@@ -12,7 +12,7 @@ class Question extends React.Component {
         super(props);
         this.state = {
             step: 1,
-            selectedOption: null,
+            selectedOption: { id: -1 },
             didntUnderstand: false,
             selectAnotherQuestion: false,
         }
@@ -21,7 +21,7 @@ class Question extends React.Component {
     componentWillReceiveProps() {
         this.setState({
             step: 1,
-            selectedOption: null,
+            selectedOption: { id: -1 },
             didntUnderstand: false,
             selectAnotherQuestion: false,
         });
@@ -41,10 +41,10 @@ class Question extends React.Component {
         });
 
         if (selectedOption) {
-            // this.setState({
-            //     selectedOption: selectedOption,
-            // })
-            this.props.next(selectedOption);
+            this.setState({
+                selectedOption: selectedOption,
+            })
+            setTimeout(() => { this.props.next(selectedOption) }, 1000);
         } else {
             this.setState({
                 didntUnderstand: true,
@@ -78,6 +78,7 @@ class Question extends React.Component {
             this.setState({
                 selectAnotherQuestion: true,
                 step: 2,
+                selectedOption: { id: -1 },
             })
         }
     }
@@ -147,12 +148,28 @@ class Question extends React.Component {
                 }
                 {/* <VoiceRecognition /> */}
 
-                <h1>Question component</h1>
-                <h1>{title}</h1>
-                <h1>{props}</h1>
-
-                <button onClick={() => next(id)}>Submit</button>
-                <button onClick={() => previous(id)}>Prevoius</button>
+                <div style={{
+                    color: 'white',
+                    fontSize: 35,
+                }}>
+                    <div style={{ marginBottom: 50 }}>{this.props.title}</div>
+                    <div>
+                        {this.props.options.map(option => (
+                            <div key={option.id} style={{
+                                display: 'inline-block',
+                                margin: 20,
+                                padding: '5px 25px',
+                                fontSize: 35,
+                                color: 'white',
+                                borderStyle: 'solid',
+                                borderWidth: 1,
+                                borderColor: '#003b5a',
+                                borderRadius: 15,
+                                backgroundColor: this.state.selectedOption.id === option.id ? '#003b5a' : 'transparent',
+                            }} > {option.label}</div>
+                        ))}
+                    </div>
+                </div>
             </div>
         )
     }

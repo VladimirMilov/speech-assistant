@@ -77,11 +77,13 @@ const steps = [
         title: 'Is your Foundation with Piling? ',
         options: [
             {
+                id: 1,
                 label: 'Yes',
                 keywords: ['yes', 'affirmative'],
                 weight: 250,
             },
             {
+                id: 2,
                 label: 'No',
                 keywords: ['no', 'denied'],
                 weight: 0,
