@@ -3,7 +3,18 @@ import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
-import recording from '../recording.gif';
+import wavegif from '../assets/Wave.gif';
+
+const speakerStyles = {
+    position: 'fixed',
+    top: '20px',
+    left: '43%',
+}
+
+const Wave = {
+    width: '200px',
+    height: '80px',
+}
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
@@ -96,39 +107,51 @@ class Question extends React.Component {
             <div>
                 {/* Didnt understand the question */}
                 {this.state.didntUnderstand &&
-                    <VoicePlayer
-                        play
-                        text={getSystemMessage('didntUnderstand')}
-                        onEnd={() => this.setState({ didntUnderstand: false, step: step })}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={getSystemMessage('didntUnderstand')}
+                            onEnd={() => this.setState({ didntUnderstand: false, step: step })}
+                        />
+                    </div>
                 }
 
                 {/* Didnt understand the question */}
                 {this.state.selectAnotherQuestion &&
-                    <VoicePlayer
-                        play
-                        text={getSystemMessage('anotherOption')}
-                        onEnd={() => this.setState({ selectAnotherQuestion: false, step: 2 })}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={getSystemMessage('anotherOption')}
+                            onEnd={() => this.setState({ selectAnotherQuestion: false, step: 2 })}
+                        />
+                    </div>
                 }
 
 
                 {/* Read the question */}
                 {step === 0 &&
-                    <VoicePlayer
-                        play
-                        text={title}
-                        onEnd={this.nextStep}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={title}
+                            onEnd={this.nextStep}
+                        />
+                    </div>
                 }
 
                 {/* Read the answers */}
                 {step === 1 &&
-                    <VoicePlayer
-                        play
-                        text={readableOptions}
-                        onEnd={this.nextStep}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={readableOptions}
+                            onEnd={this.nextStep}
+                        />
+                    </div>
                 }
                 {/* Listen for answer */}
                 {step === 2 && !this.state.didntUnderstand &&
@@ -138,11 +161,14 @@ class Question extends React.Component {
                 }
                 {/* Read confirmation answer */}
                 {step === 3 &&
-                    <VoicePlayer
-                        play
-                        text={`Are you sure about this answer: ${this.state.selectedOption.label}`}
-                        onEnd={this.nextStep}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={`Are you sure about this answer: ${this.state.selectedOption.label}`}
+                            onEnd={this.nextStep}
+                        />
+                    </div>
                 }
 
                 {/* Listen for confirmation answer */}
