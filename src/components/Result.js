@@ -60,7 +60,7 @@ class Result extends React.Component {
     render() {
         return (
             <div style={bgStyle}>
-                <div style={labelStyle}>The Voice of KNAB</div>
+                <div style={labelStyle}>Thank you!</div>
                 {
                     this.state.speak &&
                     <VoicePlayer

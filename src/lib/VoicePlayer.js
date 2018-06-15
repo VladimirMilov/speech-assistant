@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 class VoicePlayer extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     if ('speechSynthesis' in window) {
@@ -22,7 +22,7 @@ class VoicePlayer extends Component {
       volume: 1,
       rate: 1,
       pitch: 1,
-      lang: 'en-US'
+      lang: 'en-GB'
     }
 
     let speech = new SpeechSynthesisUtterance()
@@ -52,7 +52,7 @@ class VoicePlayer extends Component {
     this.setState({ playing: true })
   }
 
-  componentWillReceiveProps ({ pause }) {
+  componentWillReceiveProps({ pause }) {
     if (pause && this.state.playing && this.state.started) {
       return this.pause()
     }
@@ -62,11 +62,11 @@ class VoicePlayer extends Component {
     }
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const events = [
       { name: 'start', action: this.props.onStart },
       { name: 'error', action: this.props.onError },
@@ -88,11 +88,11 @@ class VoicePlayer extends Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.cancel()
   }
 
-  render () {
+  render() {
     return null
   }
 }

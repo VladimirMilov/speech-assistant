@@ -5,13 +5,25 @@ import QuestionMulti from './components/QuestionMulti';
 import QuestionYesNo from './components/QuestionYesNo';
 import QuestionOpen from './components/QuestionOpen';
 import Result from './components/Result';
-import VoicePlayer from './lib/VoicePlayer';
-import VoiceRecognition from './lib/VoiceRecognition';
 import {
   steps,
   stepTypes,
   answerTypes,
 } from './config/workflow';
+import Image from './knab-blob.png';
+
+const bgStyle = {
+  backgroundColor: '#00a4a7',
+  color: 'white',
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
 
 class App extends Component {
   constructor(props) {
@@ -99,8 +111,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={bgStyle}>
+        <div style={{
+          position: 'absolute',
+          bottom: 50,
+          left: 50,
+          width: 100,
+        }}>
+          <img src="https://www.knab.nl/-/media/knab/shared/knab-logo.svg" alt="Logo Knab" />
+        </div>
         {this.renderStep()}
+        <div style={{
+          position: 'absolute',
+          bottom: 50,
+          right: 50,
+        }}>
+          <img src={Image} />
+        </div>
       </div>
     );
   }
