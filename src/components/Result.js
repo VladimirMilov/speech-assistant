@@ -9,6 +9,18 @@ import {
     voices,
 } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
+import wavegif from '../assets/Wave.gif';
+
+const speakerStyles = {
+    position: 'fixed',
+    top: '20px',
+    left: '46%',
+}
+
+const waveStyle = {
+    width: '128px',
+    height: '72px',
+}
 
 const bgStyle = {
     backgroundColor: '#00a4a7',
@@ -62,11 +74,14 @@ class Result extends React.Component {
             <div style={bgStyle}>
                 {
                     this.state.speak &&
-                    <VoicePlayer
-                        play
-                        text={getSystemMessage('end')}
-                        onEnd={this.listen}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={wavegif} style={waveStyle} />
+                        <VoicePlayer
+                            play
+                            text={getSystemMessage('end')}
+                            onEnd={this.listen}
+                        />
+                    </div>
                 }
                 {
                     this.state.listen && <VoiceRecognition

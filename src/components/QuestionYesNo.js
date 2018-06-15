@@ -4,16 +4,17 @@ import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
 import wavegif from '../assets/Wave.gif';
+import recording from '../recording.gif';
 
 const speakerStyles = {
     position: 'fixed',
     top: '20px',
-    left: '43%',
+    left: '46%',
 }
 
-const Wave = {
-    width: '200px',
-    height: '80px',
+const waveStyle = {
+    width: '128px',
+    height: '72px',
 }
 
 const approveWords = ['yes', 'correct', 'right'];
@@ -104,7 +105,7 @@ class Question extends React.Component {
                 {/* Didnt understand the question */}
                 {this.state.didntUnderstand &&
                     <div style={speakerStyles}>
-                        <img src={wavegif} style={Wave} />
+                        <img src={wavegif} style={waveStyle} />
                         <VoicePlayer
                             play
                             text={getSystemMessage('didntUnderstand')}
@@ -116,7 +117,7 @@ class Question extends React.Component {
                 {/* Didnt understand the question */}
                 {this.state.selectAnotherQuestion &&
                     <div style={speakerStyles}>
-                        <img src={wavegif} style={Wave} />
+                        <img src={wavegif} style={waveStyle} />
                         <VoicePlayer
                             play
                             text={getSystemMessage('anotherOption')}
@@ -129,7 +130,7 @@ class Question extends React.Component {
                 {/* Read the question */}
                 {step === 1 &&
                     <div style={speakerStyles}>
-                        <img src={wavegif} style={Wave} />
+                        <img src={wavegif} style={waveStyle} />
                         <VoicePlayer
                             play
                             text={title}
@@ -148,14 +149,17 @@ class Question extends React.Component {
                 } */}
                 {/* Listen for answer */}
                 {step === 2 && !this.state.didntUnderstand &&
-                    <VoiceRecognition
-                        onResult={(res) => this.chooseAnswer(res.finalTranscript)}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={recording} style={waveStyle} />
+                        <VoiceRecognition
+                            onResult={(res) => this.chooseAnswer(res.finalTranscript)}
+                        />
+                    </div>
                 }
                 {/* Read confirmation answer */}
                 {step === 3 &&
                     <div style={speakerStyles}>
-                        <img src={wavegif} style={Wave} />
+                        <img src={wavegif} style={waveStyle} />
                         <VoicePlayer
                             play
                             text={'Are you sure.'}
@@ -166,9 +170,12 @@ class Question extends React.Component {
 
                 {/* Listen for confirmation answer */}
                 {step === 4 &&
-                    <VoiceRecognition
-                        onResult={(res) => this.confirmationCheck(res.finalTranscript)}
-                    />
+                    <div style={speakerStyles}>
+                        <img src={recording} style={waveStyle} />
+                        <VoiceRecognition
+                            onResult={(res) => this.confirmationCheck(res.finalTranscript)}
+                        />
+                    </div>
                 }
                 {/* <VoiceRecognition /> */}
 
