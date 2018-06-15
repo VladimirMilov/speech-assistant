@@ -3,9 +3,21 @@ import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
 import { phraseMatches } from '../lib/helper';
+import wavegif from '../assets/Wave.gif';
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
+
+const speakerStyles = {
+    position: 'fixed',
+    top: '20px',
+    left: '43%',
+}
+
+const Wave = {
+    width: '200px',
+    height: '80px',
+}
 
 class QuestionOpen extends React.Component {
     constructor(props) {
@@ -97,11 +109,14 @@ class QuestionOpen extends React.Component {
 
                 {/* Read the question */}
                 {step === 0 &&
-                    <VoicePlayer
-                        play
-                        text={title}
-                        onEnd={this.nextStep}
-                    />
+                    <div style={speakerStyles}>
+                    <img src={wavegif} style={Wave} />
+                        <VoicePlayer
+                            play
+                            text={title}
+                            onEnd={this.nextStep}
+                        />
+                    </div>
                 }
 
                 {/* Listen for answer */}
