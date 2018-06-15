@@ -155,7 +155,7 @@ class Question extends React.Component {
                     </div>
                 }
                 {/* Listen for answer */}
-                {step === 2 && !this.state.didntUnderstand &&
+                {step === 2 && !this.state.didntUnderstand && !this.state.selectAnotherQuestion &&
                     <div style={speakerStyles}>
                         <img src={recording} style={waveStyle} />
                         <VoiceRecognition

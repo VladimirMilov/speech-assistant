@@ -101,7 +101,7 @@ class Result extends React.Component {
                         borderRadius: 15,
                         padding: 20,
                         fontSize: 35,
-                    }}>The amount is: </div>
+                    }}>The amount is: €1500</div>
                 </div>
             </div>
         )

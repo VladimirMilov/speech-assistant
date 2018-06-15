@@ -127,7 +127,7 @@ class QuestionOpen extends React.Component {
                 }
 
                 {/* Listen for answer */}
-                {step === 1 && !this.state.didntUnderstand &&
+                {step === 1 && !this.state.didntUnderstand && !this.state.selectAnotherAddress &&
                     <div style={speakerStyles}>
                         <img src={recording} style={waveStyle} />
                         <VoiceRecognition
