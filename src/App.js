@@ -29,7 +29,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 0,
+      currentStep: 1,
       stepsResult: [],
     }
   }
@@ -116,7 +116,7 @@ class App extends Component {
           position: 'absolute',
           bottom: 50,
           left: 50,
-          width: 100,
+          width: 150,
         }}>
           <img src="https://www.knab.nl/-/media/knab/shared/knab-logo.svg" alt="Logo Knab" />
         </div>

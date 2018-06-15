@@ -2,6 +2,7 @@ import React from 'react';
 import VoicePlayer from '../lib/VoicePlayer';
 import VoiceRecognition from '../lib/VoiceRecognition';
 import { getSystemMessage } from '../config/workflow';
+import { phraseMatches } from '../lib/helper';
 
 const approveWords = ['yes', 'correct', 'right'];
 const declineWords = ['no', 'not', 'world', 'hello'];
@@ -11,9 +12,10 @@ class QuestionOpen extends React.Component {
         super(props);
         this.state = {
             step: 0,
-            selectedAddress: null,
             didntUnderstand: false,
             selectAnotherAddress: false,
+            selectedAddress: 'Your address will appear here',
+            addressEntered: false,
         }
     }
 
@@ -33,25 +35,22 @@ class QuestionOpen extends React.Component {
     chooseAnswer = (result) => {
         this.setState({
             selectedAddress: result,
+            addressEntered: true,
             step: this.state.step + 1,
         })
     }
 
     confirmationCheck = (result) => {
-        result = result.split(' ');
-        console.log(result);
         let approve = false;
         let decline = false;
-        approveWords.forEach(word => {
-            if (result.indexOf(word) >= 0) {
-                approve = true;
-            }
-        })
-        declineWords.forEach(word => {
-            if (result.indexOf(word) >= 0) {
-                decline = true;
-            }
-        })
+
+        if (phraseMatches(result, approveWords)) {
+            approve = true;
+        }
+
+        if (phraseMatches(result, declineWords)) {
+            decline = true;
+        }
 
         if (approve === decline) {
             this.setState({
@@ -64,6 +63,8 @@ class QuestionOpen extends React.Component {
         }
         if (decline) {
             this.setState({
+                selectedAddress: 'Your address will appear here',
+                addressEntered: false,
                 selectAnotherAddress: true,
                 step: 1,
             })
@@ -126,8 +127,23 @@ class QuestionOpen extends React.Component {
                     />
                 }
 
-                <h1>Question component</h1>
-                <h1>{title}</h1>
+                <div style={{
+                    color: 'white',
+                    fontSize: 25,
+                }}>
+                    <div>{this.props.title}</div>
+                    <div style={{
+                        borderStyle: 'solid',
+                        borderWidth: 1,
+                        borderColor: '#003b5a',
+                        borderRadius: 15,
+                        marginTop: 50,
+                        padding: 20,
+                        fontSize: 35,
+                        color: this.state.addressEntered ? 'white' : '#C0C0C0',
+                    }}>{this.state.selectedAddress}</div>
+                </div>
+
             </div>
         )
     }

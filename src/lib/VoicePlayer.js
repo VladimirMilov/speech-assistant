@@ -20,7 +20,7 @@ class VoicePlayer extends Component {
     const defaults = {
       text: '',
       volume: 1,
-      rate: 1,
+      rate: 0.9,
       pitch: 1,
       lang: 'en-GB'
     }
