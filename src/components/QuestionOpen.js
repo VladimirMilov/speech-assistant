@@ -130,10 +130,10 @@ class QuestionOpen extends React.Component {
                 <div style={{
                     color: 'white',
                     fontSize: 35,
-                    marginBottom: 50,
                 }}>
                     <div>{this.props.title}</div>
                     <div style={{
+                        marginTop: 50,
                         borderStyle: 'solid',
                         borderWidth: 1,
                         borderColor: '#003b5a',

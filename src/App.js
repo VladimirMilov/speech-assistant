@@ -11,6 +11,7 @@ import {
   answerTypes,
 } from './config/workflow';
 import Image from './knab-blob.png';
+import logosvg from './knab.svg';
 
 const bgStyle = {
   backgroundColor: '#00a4a7',
@@ -29,7 +30,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      currentStep: 3,
+      currentStep: 0,
       stepsResult: [],
     }
   }
@@ -112,15 +113,16 @@ class App extends Component {
   render() {
     return (
       <div className="App" style={bgStyle}>
+        {this.renderStep()}
         <div style={{
           position: 'absolute',
           bottom: 50,
           left: 50,
-          width: 150,
+          width: 200,
         }}>
-          <img src="https://www.knab.nl/-/media/knab/shared/knab-logo.svg" alt="Logo Knab" />
+          <img src={logosvg} />
         </div>
-        {this.renderStep()}
+
         <div style={{
           position: 'absolute',
           bottom: 50,
@@ -128,7 +130,7 @@ class App extends Component {
         }}>
           <img src={Image} />
         </div>
-      </div>
+      </div >
     );
   }
 }

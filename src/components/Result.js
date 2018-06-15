@@ -60,7 +60,6 @@ class Result extends React.Component {
     render() {
         return (
             <div style={bgStyle}>
-                <div style={labelStyle}>Thank you!</div>
                 {
                     this.state.speak &&
                     <VoicePlayer
@@ -74,6 +73,21 @@ class Result extends React.Component {
                         onResult={this.checkResult}
                     />
                 }
+                <div style={{
+                    color: 'white',
+                    fontSize: 35,
+                }}>
+                    <div>Thank you!</div>
+                    <div style={{
+                        marginTop: 50,
+                        borderStyle: 'solid',
+                        borderWidth: 1,
+                        borderColor: '#003b5a',
+                        borderRadius: 15,
+                        padding: 20,
+                        fontSize: 35,
+                    }}>Your price is €1500</div>
+                </div>
             </div>
         )
     }

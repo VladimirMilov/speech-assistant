@@ -13,14 +13,15 @@ const answerTypes = {
 
 const systemMessages = {
     start: 'Welcome to The Voice of KNAB. Please say "start" to begin.',
+    // start: 'Welcome',
     yourChoice: 'You have chosen "{{var1}}"',
     isThisCorrect: 'Is this correct?',
     youHaveChosen: 'You have chosen',
     didntUnderstand: 'I did not get that. Could you please repeat.',
     anotherOption: 'Choose another option.',
-    anotherAddress: 'Ok, Choose another address.',
+    anotherAddress: 'Choose another address.',
     // end: 'You have completed the questionnaire. The amount to pay is {{var1}}',
-    end: 'You have completed the questionnaire. The amount to pay is 1500 EURO',
+    end: 'You have completed the questionnaire. The amount to pay for the selected services is 1500 EURO',
 };
 
 const getSystemMessage = (key, vars = []) => {
